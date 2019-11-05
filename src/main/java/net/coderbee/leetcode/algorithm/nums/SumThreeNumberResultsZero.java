@@ -35,9 +35,15 @@ public class SumThreeNumberResultsZero {
 
 		List<List<Integer>> rs = new ArrayList<>();
 		for (int i = 0; i < nums.length - 2; i++) {
+			if (nums[i] > 0) {
+				break;
+			}
 			for (int j = i + 1; j < nums.length - 1; j++) {
-				int sum = -(nums[i] + nums[j]);
-				int k = Arrays.binarySearch(nums, j + 1, nums.length, sum);
+				int sum = (nums[i] + nums[j]);
+				if (sum > 0) {
+					break;
+				}
+				int k = Arrays.binarySearch(nums, j + 1, nums.length, -sum);
 				if (k < 0) {
 					continue;
 				}
