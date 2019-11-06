@@ -15,14 +15,12 @@ public class MergeTwoSortedLists {
 			}
 		}
 
-		while (l1 != null) {
-			p = p.next = l1;
-			l1 = l1.next;
+		if (l1 != null) {
+			p.next = l1;
 		}
 
-		while (l2 != null) {
-			p = p.next = l2;
-			l2 = l2.next;
+		if (l2 != null) {
+			p.next = l2;
 		}
 
 		return head.next;
