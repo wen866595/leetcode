@@ -50,4 +50,12 @@ public class ListNode {
 		return p;
 	}
 
+	public ListNode getTail() {
+		ListNode p = this;
+		while (p.next != null) {
+			p = p.next;
+		}
+		return p;
+	}
+
 }
