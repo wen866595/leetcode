@@ -7,6 +7,24 @@ public class ProductOfArrayExceptSelf {
 	// 输入: [1,2,3,4]
 	// 输出: [24,12,8,6]
 	public static int[] productExceptSelf(int[] nums) {
+		int[] rs = new int[nums.length];
+
+		int product = 1;
+		for (int i = 0; i < nums.length; i++) {
+			rs[i] = product;
+			product *= nums[i];
+		}
+
+		product = 1;
+		for (int i = nums.length - 1; i >= 0; i--) {
+			rs[i] *= product;
+			product *= nums[i];
+		}
+
+		return rs;
+	}
+
+	public static int[] productExceptSelf3N(int[] nums) {
 		int[] leftProduct = new int[nums.length];
 		int[] rightProduct = new int[nums.length];
 		leftProduct[0] = nums[0];
