@@ -1,6 +1,7 @@
 package net.coderbee.leetcode.algorithm.combination;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,16 +23,15 @@ public class CombinationSum {
 
 	public static List<List<Integer>> combinationSum(int[] candidates, int target) {
 		List<List<Integer>> rs = new LinkedList<List<Integer>>();
-		recursive(rs, new ArrayList<Integer>(), 0, candidates, target);
+		Arrays.sort(candidates);
+		recursive(rs, new ArrayList<Integer>(), 0, candidates, target, 0);
 		return rs;
 	}
 
-	private static void recursive(List<List<Integer>> rs, List<Integer> tmp, int tmpSum, int[] candidates, int target) {
+	private static void recursive(List<List<Integer>> rs, List<Integer> tmp, int tmpSum, int[] candidates, int target,
+			int start) {
 		if (tmpSum == target) {
-			tmp.sort(Integer::compareTo);
-			if (!rs.contains(tmp)) {
-				rs.add(tmp);
-			}
+			rs.add(tmp);
 			return;
 		}
 
@@ -39,12 +39,10 @@ public class CombinationSum {
 			return;
 		}
 
-		for (int i : candidates) {
-			if (tmpSum + i <= target) {
-				List<Integer> list = new ArrayList<>(tmp);
-				list.add(i);
-				recursive(rs, list, tmpSum + i, candidates, target);
-			}
+		for (int i = start; i < candidates.length && tmpSum + candidates[i] <= target; i++) {
+			List<Integer> list = new ArrayList<>(tmp);
+			list.add(candidates[i]);
+			recursive(rs, list, tmpSum + candidates[i], candidates, target, i);
 		}
 	}
 
