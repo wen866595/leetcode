@@ -2,7 +2,6 @@ package net.coderbee.leetcode.algorithm.nums;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 
 public class PerfectSquares {
 	int min = -1;
@@ -13,21 +12,20 @@ public class PerfectSquares {
 		System.out.println("nums:" + nums);
 
 		min = n;
-		LinkedList<Integer> addin = new LinkedList<Integer>();
-		numSquares(nums, addin, 0, n);
+		numSquares(nums, 0, 0, n);
 		return min;
 	}
 
-	private void numSquares(ArrayList<Integer> nums, LinkedList<Integer> addin, int sum, int n) {
+	private void numSquares(ArrayList<Integer> nums, int currentSize, int sum, int n) {
 		if (sum == n) {
-			if (addin.size() < min) {
-				min = addin.size();
+			if (currentSize < min) {
+				min = currentSize;
 			}
-			System.out.println("addin:" + addin);
+			System.out.println("currentSize:" + currentSize);
 			return;
 		}
 
-		if (addin.size() + 1 >= min) {
+		if (currentSize + 1 >= min) {
 			return;
 		}
 
@@ -35,11 +33,7 @@ public class PerfectSquares {
 			if (sum + i > n) {
 				continue;
 			}
-			if (addin.size() < min) {
-				addin.addLast(i);
-				numSquares(nums, addin, sum + i, n);
-				addin.removeLast();
-			}
+			numSquares(nums, currentSize + 1, sum + i, n);
 		}
 	}
 
