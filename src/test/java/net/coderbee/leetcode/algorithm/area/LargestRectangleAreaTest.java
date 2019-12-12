@@ -13,6 +13,10 @@ public class LargestRectangleAreaTest {
 		assertEquals(10, LargestRectangleArea.largestRectangleArea(new int[] { 2, 1, 5, 6, 2, 3 }));
 		assertEquals(2, LargestRectangleArea.largestRectangleArea(new int[] { 2 }));
 		assertEquals(10, LargestRectangleArea.largestRectangleArea(new int[] { 2, 0, 5, 6, 2, 3 }));
+
+		assertEquals(10, LargestRectangleArea.largestRectangleArea0(new int[] { 2, 1, 5, 6, 2, 3 }));
+		assertEquals(2, LargestRectangleArea.largestRectangleArea0(new int[] { 2 }));
+		assertEquals(10, LargestRectangleArea.largestRectangleArea0(new int[] { 2, 0, 5, 6, 2, 3 }));
 	}
 
 }
