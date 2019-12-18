@@ -14,6 +14,14 @@ public class LongestValidParenthesesTest {
 		assertEquals(8, LongestValidParentheses.longestValidParentheses("(()())()"));
 		assertEquals(2, LongestValidParentheses.longestValidParentheses("()(()"));
 		assertEquals(6, LongestValidParentheses.longestValidParentheses("()(())"));
+
+		assertEquals(2, LongestValidParentheses.bf("(()"));
+		assertEquals(4, LongestValidParentheses.bf(")()())"));
+		assertEquals(4, LongestValidParentheses.bf("()())()"));
+		assertEquals(8, LongestValidParentheses.bf("(()())()"));
+		assertEquals(2, LongestValidParentheses.bf("()(()"));
+		assertEquals(4, LongestValidParentheses.bf("())()()"));
+		assertEquals(6, LongestValidParentheses.bf("()(())"));
 	}
 
 }
