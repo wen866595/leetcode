@@ -2,6 +2,8 @@ package net.coderbee.leetcode.algorithm.strings;
 
 public class RegularExpressionMatching {
 
+	// 分情况处理
+	// 从模式串出发
 	public static boolean isMatch(String s, String p) {
 		if (s == null) {
 			s = "";
