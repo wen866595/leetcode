@@ -11,13 +11,13 @@ public class MaximalRectangle {
 		max = 0;
 		for (int r = 0; r < matrix.length; r++) {
 			for (int c = 0; c < matrix[r].length; c++) {
-				if (matrix[r][c] == '1') {
+				if (matrix[r][c] == '1' && pureArea(r, c, matrix.length - 1, matrix[r].length - 1) > max) {
 					trace(matrix, r, c, r, c);
 				}
 			}
 		}
 
-//		System.out.println("\n\n\n");
+		System.out.println("\n\n\n");
 		return max;
 	}
 
@@ -40,8 +40,8 @@ public class MaximalRectangle {
 
 	boolean traceRight(char[][] matrix, int startRow, int startCol, int curRow, int curCol) {
 		int nextCol = curCol + 1;
-		boolean addRight = nextCol < matrix[curRow].length;
-		if (addRight) {
+		if (nextCol < matrix[curRow].length) {
+			boolean addRight = true;
 			for (int r = startRow; r <= curRow; r++) {
 				if (matrix[r][nextCol] == '0') {
 					addRight = false;
@@ -59,8 +59,8 @@ public class MaximalRectangle {
 
 	boolean traceDown(char[][] matrix, int startRow, int startCol, int curRow, int curCol) {
 		int nextRow = curRow + 1;
-		boolean addNextRow = nextRow < matrix.length;
-		if (addNextRow) {
+		if (nextRow < matrix.length) {
+			boolean addNextRow = true;
 			for (int c = startCol; c <= curCol; c++) {
 				if (matrix[nextRow][c] == '0') {
 					addNextRow = false;
@@ -76,10 +76,14 @@ public class MaximalRectangle {
 		return false;
 	}
 
+	final int pureArea(int startRow, int startCol, int curRow, int curCol) {
+		return (curRow - startRow + 1) * (curCol - startCol + 1);
+	}
+
 	int calcArea(int startRow, int startCol, int curRow, int curCol) {
-		int area = (curRow - startRow + 1) * (curCol - startCol + 1);
-//		System.out.println(
-//				"startRow:" + startRow + ", startCol:" + startCol + ", curRow:" + curRow + ", curCol:" + curCol);
+		int area = pureArea(startRow, startCol, curRow, curCol);
+		System.out.println(
+				"startRow:" + startRow + ", startCol:" + startCol + ", curRow:" + curRow + ", curCol:" + curCol);
 		max = Math.max(max, area);
 		return area;
 	}

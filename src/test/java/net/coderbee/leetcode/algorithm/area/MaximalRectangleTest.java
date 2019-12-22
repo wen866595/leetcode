@@ -15,6 +15,12 @@ public class MaximalRectangleTest {
 			{ '1', '1', '1', '1', '1' },
 			{ '1', '0', '0', '1', '0' }
 		}));
+		assertEquals(6, obj.maximalRectangle(new char[][] {
+			{ '1', '1', '1', '0', '0' },
+			{ '0', '1', '1', '1', '1' },
+			{ '1', '0', '1', '1', '1' },
+			{ '1', '0', '0', '1', '0' }
+		}));
 		assertEquals(6, obj.maximalRectangle(
 				new char[][] { { '1', '0', '1' },
 							   { '0', '1', '1' },
