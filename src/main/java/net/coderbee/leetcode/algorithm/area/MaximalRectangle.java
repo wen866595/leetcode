@@ -1,6 +1,29 @@
 package net.coderbee.leetcode.algorithm.area;
 
 public class MaximalRectangle {
+
+	public static int maximalRectangleDP(char[][] matrix) {
+		if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+			return 0;
+		}
+
+		int maxArea = 0;
+		int[][] dp = new int[matrix.length][matrix[0].length];
+		for (int r = 0; r < matrix.length; r++) {
+			for (int c = 0; c < matrix[r].length; c++) {
+				if (matrix[r][c] == '1') {
+					dp[r][c] = c == 0 ? 1 : dp[r][c - 1] + 1;
+					int minWidth = dp[r][c];
+					for (int k = r; k >= 0 && dp[k][c] > 0; k--) {
+						minWidth = Math.min(minWidth, dp[k][c]);
+						maxArea = Math.max(maxArea, (r - k + 1) * minWidth);
+					}
+				}
+			}
+		}
+		return maxArea;
+	}
+
 	int max = 0;
 
 	public int maximalRectangle(char[][] matrix) {

@@ -32,5 +32,31 @@ public class MaximalRectangleTest {
 							   { '1', '1', '1' },
 							   { '0', '1', '0' }}));
 	}
+	
+	@Test
+	public void testDP() throws Exception {
+		assertEquals(6, MaximalRectangle.maximalRectangleDP(new char[][] {
+			{ '1', '0', '1', '0', '0' },
+			{ '1', '0', '1', '1', '1' },
+			{ '1', '1', '1', '1', '1' },
+			{ '1', '0', '0', '1', '0' }
+		}));
+		assertEquals(6, MaximalRectangle.maximalRectangleDP(new char[][] {
+			{ '1', '1', '1', '0', '0' },
+			{ '0', '1', '1', '1', '1' },
+			{ '1', '0', '1', '1', '1' },
+			{ '1', '0', '0', '1', '0' }
+		}));
+		assertEquals(6, MaximalRectangle.maximalRectangleDP(
+				new char[][] { { '1', '0', '1' },
+							   { '0', '1', '1' },
+							   { '1', '1', '1' },
+							   { '0', '1', '1' }}));
+		assertEquals(4,MaximalRectangle.maximalRectangleDP(
+				new char[][] { { '1', '0', '1' },
+							   { '0', '1', '1' },
+							   { '1', '1', '1' },
+							   { '0', '1', '0' }}));
+	}
 
 }
