@@ -30,6 +30,7 @@ import java.util.Set;
  */
 public class LongestSubstringWithoutRepeatingCharacters {
 
+	// 该算法的复杂度看起来是 (N*N) 的，但消除了基本类型与包装类型之间的转换，也没有Set/Map 的集合操作，执行速度反而比其他的要快
 	public static int lengthOfLongestSubstringBetter(String s) {
 		if (s == null) {
 			return 0;
