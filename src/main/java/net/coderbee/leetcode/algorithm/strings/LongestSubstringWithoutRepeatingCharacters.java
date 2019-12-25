@@ -1,7 +1,11 @@
 package net.coderbee.leetcode.algorithm.strings;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。<br/>
@@ -25,6 +29,61 @@ import java.util.LinkedHashSet;
  * <br/>
  */
 public class LongestSubstringWithoutRepeatingCharacters {
+
+	public static int lengthOfLongestSubstringBetter(String s) {
+		if (s == null) {
+			return 0;
+		}
+		int len = 0, left = 0;
+		char[] ch = s.toCharArray();
+		for (int right = 0; right < ch.length; right++) {
+			for (int i = left; i < right; i++) {
+				if (ch[i] == ch[right]) {
+					len = Math.max(len, right - left);
+					left = i + 1;
+					break;
+				}
+			}
+		}
+		return Math.max(len, ch.length - left);
+	}
+
+	public static int lengthOfLongestSubstringLine(String s) {
+		if (s == null) {
+			return 0;
+		}
+		int len = 0;
+		Map<Character, Integer> set = new HashMap<Character, Integer>();
+		for (int left = 0, right = 0; right < s.length(); right++) {
+			if (set.containsKey(s.charAt(right))) {
+				// tcabacefgt 删除第二个 c 时 left 已经在 第二个 a 的位置
+				left = Math.max(left, set.get(s.charAt(right)));
+			}
+			// 不能放到上面的 if 语句的 else 块，因为最后一个 t 对应的第一个 t 已经被排除了。
+			len = Math.max(len, right - left + 1);
+			set.put(s.charAt(right), right + 1);
+		}
+		return len;
+	}
+
+	public static int lengthOfLongestSubstringSlide(String s) {
+		if (s == null) {
+			s = "";
+		}
+		int len = 0;
+		Set<Character> set = new HashSet<Character>();
+		for (int left = 0, right = 0; right < s.length();) {
+			if (set.contains(s.charAt(right))) {
+				set.remove(s.charAt(left));
+				left++;
+			} else {
+				set.add(s.charAt(right));
+				len = Math.max(len, set.size());
+				right++;
+			}
+		}
+		return len;
+	}
 
 	public static int lengthOfLongestSubstring(String s) {
 		int len = 0;
