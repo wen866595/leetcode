@@ -10,6 +10,7 @@ public class ContainerWithMostWaterTest {
 		ContainerWithMostWater obj = new ContainerWithMostWater();
 
 		Assert.assertEquals(49, obj.maxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
+		Assert.assertEquals(49, ContainerWithMostWater.maxAreaByTwoPointer(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
 	}
 
 }
