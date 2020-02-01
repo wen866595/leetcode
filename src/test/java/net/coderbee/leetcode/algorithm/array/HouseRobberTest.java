@@ -7,6 +7,17 @@ import org.junit.Test;
 public class HouseRobberTest {
 
 	@Test
+	public void rob() throws Exception {
+		assertEquals(4, HouseRobber.rob(new int[] { 2, 3, 2 }));
+		assertEquals(4, HouseRobber.rob(new int[] { 1, 2, 3, 1 }));
+		assertEquals(12, HouseRobber.rob(new int[] { 2, 7, 9, 3, 1 }));
+
+		assertEquals(4, HouseRobber.rob2(new int[] { 2, 3, 2 }));
+		assertEquals(4, HouseRobber.rob2(new int[] { 1, 2, 3, 1 }));
+		assertEquals(12, HouseRobber.rob2(new int[] { 2, 7, 9, 3, 1 }));
+	}
+
+	@Test
 	public void robii() throws Exception {
 		assertEquals(3, HouseRobberii.rob(new int[] { 2, 3, 2 }));
 		assertEquals(3, HouseRobberii.rob(new int[] { 2, 3 }));
