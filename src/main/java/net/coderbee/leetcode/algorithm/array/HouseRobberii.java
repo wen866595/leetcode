@@ -9,7 +9,7 @@ package net.coderbee.leetcode.algorithm.array;
  */
 public class HouseRobberii {
 
-	public static int robRecursive(int[] nums) {
+	public static int rob(int[] nums) {
 //		System.out.println("\n\n\n\n");
 
 		if (nums.length < 1) {
@@ -19,23 +19,30 @@ public class HouseRobberii {
 			return nums[0];
 		}
 
-		Integer[][] cache = new Integer[nums.length][nums.length];
-		return Math.max(rob(nums, 0, 0, nums.length - 2, cache), rob(nums, 0, 1, nums.length - 1, cache));
+		int[] cache0 = new int[nums.length];
+		for (int c = 0; c < cache0.length; c++) {
+			cache0[c] = -1;
+		}
+		int[] cache1 = new int[nums.length];
+		for (int c = 0; c < cache1.length; c++) {
+			cache1[c] = -1;
+		}
+		return Math.max(rob(nums, 0, 0, nums.length - 2, cache0), rob(nums, 0, 1, nums.length - 1, cache1));
 	}
 
-	static int rob(int[] nums, int sum, int start, int end, Integer[][] cache) {
+	static int rob(int[] nums, int sum, int start, int end, int[] cache) {
 		if (start > end) {
 			return sum;
 		}
 
-		if (cache[start][end] != null) {
-			return sum + cache[start][end];
+		if (cache[start] >= 0) {
+			return sum + cache[start];
 		}
 
 //		System.out.println("sum:" + sum + ", start:" + start + ", end:" + end);
 
 		int sub = Math.max(rob(nums, nums[start], start + 2, end, cache), rob(nums, 0, start + 1, end, cache));
-		cache[start][end] = sub;
+		cache[start] = sub;
 		return sum + sub;
 	}
 
