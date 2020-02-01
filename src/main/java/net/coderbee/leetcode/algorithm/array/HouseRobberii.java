@@ -20,14 +20,18 @@ public class HouseRobberii {
 		}
 
 		int[] cache0 = new int[nums.length];
+
+		reset(cache0);
+		int rob0 = rob(nums, 0, 0, nums.length - 2, cache0);
+
+		reset(cache0);
+		return Math.max(rob0, rob(nums, 0, 1, nums.length - 1, cache0));
+	}
+
+	private static void reset(int[] cache0) {
 		for (int c = 0; c < cache0.length; c++) {
 			cache0[c] = -1;
 		}
-		int[] cache1 = new int[nums.length];
-		for (int c = 0; c < cache1.length; c++) {
-			cache1[c] = -1;
-		}
-		return Math.max(rob(nums, 0, 0, nums.length - 2, cache0), rob(nums, 0, 1, nums.length - 1, cache1));
 	}
 
 	static int rob(int[] nums, int sum, int start, int end, int[] cache) {
