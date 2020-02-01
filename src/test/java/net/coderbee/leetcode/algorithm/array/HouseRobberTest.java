@@ -15,6 +15,14 @@ public class HouseRobberTest {
 		assertEquals(4, HouseRobber.rob2(new int[] { 2, 3, 2 }));
 		assertEquals(4, HouseRobber.rob2(new int[] { 1, 2, 3, 1 }));
 		assertEquals(12, HouseRobber.rob2(new int[] { 2, 7, 9, 3, 1 }));
+
+		assertEquals(4, HouseRobber.robDp(new int[] { 2, 3, 2 }));
+		assertEquals(4, HouseRobber.robDp(new int[] { 1, 2, 3, 1 }));
+		assertEquals(12, HouseRobber.robDp(new int[] { 2, 7, 9, 3, 1 }));
+
+		assertEquals(4, HouseRobber.robDp0(new int[] { 2, 3, 2 }));
+		assertEquals(4, HouseRobber.robDp0(new int[] { 1, 2, 3, 1 }));
+		assertEquals(12, HouseRobber.robDp0(new int[] { 2, 7, 9, 3, 1 }));
 	}
 
 	@Test
