@@ -16,6 +16,30 @@ package net.coderbee.leetcode.algorithm.dp;
  */
 public class MaximumSubarraySumWithOneDeletion {
 
+	public static int maximumSumImproveMem(int[] arr) {
+		int len = arr.length;
+
+		int[] leftRight = new int[len];
+		leftRight[0] = arr[0];
+		for (int i = 1; i < len; i++) {
+			leftRight[i] = arr[i] + Math.max(0, leftRight[i - 1]);
+		}
+
+		int prev = arr[len - 1], maxSum = Math.max(arr[0], prev);
+		for (int i = len - 2; i > 0; i--) {
+			int tmpSum = Math.max(0, arr[i]); // 用 0 表示删除这个元素
+			if (leftRight[i - 1] < 0 || prev < 0) {
+				tmpSum += Math.max(leftRight[i - 1], prev);
+			} else {
+				tmpSum += leftRight[i - 1] + prev;
+			}
+			maxSum = Math.max(maxSum, tmpSum);
+			prev = arr[i] + Math.max(0, prev);
+		}
+
+		return maxSum;
+	}
+
 	public static int maximumSum(int[] arr) {
 		int len = arr.length;
 

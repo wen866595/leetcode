@@ -15,6 +15,15 @@ public class MaximumSubarraySumWithOneDeletionTest {
 		assertEquals(4, MaximumSubarraySumWithOneDeletion.maximumSum(new int[] { 1, -2, 0, 3 }));
 		assertEquals(3, MaximumSubarraySumWithOneDeletion.maximumSum(new int[] { 1, -2, -2, 3 }));
 		assertEquals(-1, MaximumSubarraySumWithOneDeletion.maximumSum(new int[] { -1, -1, -1, -1 }));
+
+		assertEquals(14, MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { -7, 6, 1, 2, 1, 4, -1 }));
+		assertEquals(17,
+				MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { 8, -1, 6, -7, -4, 5, -4, 7, -6 }));
+		assertEquals(3, MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { 2, 1, -3, -5 }));
+		assertEquals(-2, MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { -2 }));
+		assertEquals(4, MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { 1, -2, 0, 3 }));
+		assertEquals(3, MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { 1, -2, -2, 3 }));
+		assertEquals(-1, MaximumSubarraySumWithOneDeletion.maximumSumImproveMem(new int[] { -1, -1, -1, -1 }));
 	}
 
 }
