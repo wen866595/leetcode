@@ -1,6 +1,5 @@
 package net.coderbee.leetcode.algorithm.nums;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,12 +38,7 @@ public class CoinChange {
 			return 0;
 		}
 
-		Arrays.sort(coins);
-
 		int[] dp = new int[amount + 1];
-		for (int c : coins) {
-			dp[c] = 1;
-		}
 		return coinChangeDP(coins, amount, dp);
 	}
 
@@ -70,7 +64,7 @@ public class CoinChange {
 
 		count = count == Integer.MAX_VALUE ? -1 : count;
 		dp[amount] = count;
-		System.out.println("amount:" + amount + ", count:" + count);
+//		System.out.println("amount:" + amount + ", count:" + count);
 		return count;
 	}
 
@@ -79,7 +73,6 @@ public class CoinChange {
 			return 0;
 		}
 
-		Arrays.sort(coins);
 		return coinChange(coins, amount, 0, new HashMap<Integer, Integer>());
 	}
 
