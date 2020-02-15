@@ -26,6 +26,39 @@ public class DecodeString {
 	// s = "3[a]2[bc]", 返回 "aaabcbc".
 	// s = "3[a2[c]]", 返回 "accaccacc".
 	// s = "2[abc]3[cd]ef", 返回 "abcabccdcdcdef".
+
+	public static String decodeString0(String s) {
+		if (s.isEmpty()) {
+			return s;
+		}
+
+		Stack<String> strStack = new Stack<String>();
+		Stack<Integer> multis = new Stack<Integer>();
+		int multi = 0;
+		String res = "";
+		for (char c : s.toCharArray()) {
+			if (Character.isDigit(c)) {
+				multi = multi * 10 + (c - '0');
+			} else if (c == '[') {
+				strStack.push(res);
+				res = "";
+				multis.push(multi);
+				multi = 0;
+			} else if (c == ']') {
+				Integer cnt = multis.pop();
+				StringBuilder sb = new StringBuilder(res.length() * cnt);
+				for (int i = 0; i < cnt; i++) {
+					sb.append(res);
+				}
+				res = strStack.pop() + sb.toString();
+			} else {
+				res += c;
+			}
+		}
+
+		return res;
+	}
+
 	public static String decodeString(String s) {
 		if (s.isEmpty()) {
 			return s;
@@ -35,12 +68,12 @@ public class DecodeString {
 		char[] cs = s.toCharArray();
 		String current = "";
 		for (int i = 0; i < cs.length;) {
-			if (i < cs.length && Character.isDigit(cs[i])) {
+			if (Character.isDigit(cs[i])) {
 				if (!current.isEmpty()) {
 					stack.push(current);
 					current = "";
 				}
-				while (i < cs.length && Character.isDigit(cs[i])) {
+				while (Character.isDigit(cs[i])) {
 					current += cs[i];
 					i++;
 				}
