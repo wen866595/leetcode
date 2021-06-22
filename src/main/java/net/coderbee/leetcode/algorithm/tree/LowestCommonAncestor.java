@@ -1,8 +1,5 @@
 package net.coderbee.leetcode.algorithm.tree;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 二叉树的最近公共祖先
  * 
@@ -10,45 +7,21 @@ import java.util.Map;
  *
  */
 public class LowestCommonAncestor {
+	
+	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+	    // 如果 root == p, q 在 p 的子树，直接返回也是对的，因为 P 的父节点的另一个子树肯定是返回 null
+	    if (root == null || root == p || root == q) {
+	        return root;
+	    }
 
-	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-		Map<TreeNode, Integer> counts = new HashMap<TreeNode, Integer>();
-		dfs(counts, root, p, q);
-		return lowestCommonAncestor(counts, root, p, q);
-	}
+	    TreeNode left = lowestCommonAncestor(root.left, p, q);
+	    TreeNode right = lowestCommonAncestor(root.right, p, q);
 
-	public static TreeNode lowestCommonAncestor(Map<TreeNode, Integer> counts, TreeNode root, TreeNode p, TreeNode q) {
-		if (root == null) {
-			return null;
-		}
+	    // 在某个子树上找不到时，返回另一子树的结果，如果另一子树也没找到，返回的 null。
+	    if (left == null) return right;
+	    if (right == null) return left;
 
-		if (root == p || root == q) {
-			return root;
-		}
-
-		int lc = dfs(counts, root.left, p, q);
-		if (lc == 1 && dfs(counts, root.right, p, q) == 1) {
-			return root;
-		}
-
-		if (lc > 1) {
-			return lowestCommonAncestor(counts, root.left, p, q);
-		} else {
-			return lowestCommonAncestor(counts, root.right, p, q);
-		}
-	}
-
-	private static int dfs(Map<TreeNode, Integer> counts, TreeNode root, TreeNode p, TreeNode q) {
-		if (root == null) {
-			return 0;
-		}
-
-		if (counts.get(root) != null) {
-			return counts.get(root);
-		}
-		int cnt = (root == p || root == q ? 1 : 0) + dfs(counts, root.left, p, q) + dfs(counts, root.right, p, q);
-		counts.put(root, cnt);
-		return cnt;
+	    return root; // 左、右 子树均找到节点，p/q 分别在 root 的两侧。
 	}
 
 }
