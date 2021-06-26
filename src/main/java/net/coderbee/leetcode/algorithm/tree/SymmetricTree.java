@@ -4,49 +4,66 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 101. 对称二叉树
+ * <p>
+ * 给定一个二叉树，检查它是否是镜像对称的。
+ */
 public class SymmetricTree {
 
-	public static boolean isSymmetric(TreeNode root) {
-		if (root == null) {
-			return true;
-		}
+    public static boolean isSymmetric(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
 
-		List<TreeNode> q = new LinkedList<>();
-		q.add(root);
+        if (left == null || right == null) {
+            return false;
+        }
 
-		do {
-			LinkedList<TreeNode> qnext = new LinkedList<>();
+        return left.val == right.val && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    }
 
-			for (TreeNode treeNode : q) {
-				qnext.add(treeNode.left);
-				qnext.add(treeNode.right);
-			}
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
 
-			List<TreeNode> backup = qnext.stream().collect(Collectors.toList());
-			if (!isSymmetric(qnext)) {
-				return false;
-			}
+        List<TreeNode> q = new LinkedList<>();
+        q.add(root);
 
-			q = backup.stream().filter(n -> n != null).collect(Collectors.toList());
+        do {
+            LinkedList<TreeNode> qnext = new LinkedList<>();
 
-		} while (!q.isEmpty());
+            for (TreeNode treeNode : q) {
+                qnext.add(treeNode.left);
+                qnext.add(treeNode.right);
+            }
 
-		return true;
-	}
+            List<TreeNode> backup = qnext.stream().collect(Collectors.toList());
+            if (!isSymmetric(qnext)) {
+                return false;
+            }
 
-	private static boolean isSymmetric(LinkedList<TreeNode> q) {
-		while (!q.isEmpty()) {
-			TreeNode first = q.pollFirst();
-			TreeNode last = q.pollLast();
-			if (first == null && last == null) {
-				continue;
-			}
-			if (first == null && last != null || first != null && last == null || first.val != last.val) {
-				return false;
-			}
-		}
+            q = backup.stream().filter(n -> n != null).collect(Collectors.toList());
 
-		return true;
-	}
+        } while (!q.isEmpty());
+
+        return true;
+    }
+
+    private static boolean isSymmetric(LinkedList<TreeNode> q) {
+        while (!q.isEmpty()) {
+            TreeNode first = q.pollFirst();
+            TreeNode last = q.pollLast();
+            if (first == null && last == null) {
+                continue;
+            }
+            if (first == null && last != null || first != null && last == null || first.val != last.val) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }
